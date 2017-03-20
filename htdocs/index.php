@@ -18,6 +18,7 @@ $app->request = new \Anax\Request\Request();
 $app->response = new \Anax\Response\Response();
 $app->url     = new \Anax\Url\Url();
 $app->router  = new \Anax\Route\RouterInjectable();
+$app->view     = new \Anax\View\ViewContainer();
 
 // Init the object of the request class.
 $app->request->init();
@@ -32,6 +33,12 @@ $app->url->setScriptName($app->request->getScriptName());
 // Update url configuration with values from config file.
 $app->url->configure("url.php");
 $app->url->setDefaultsFromConfiguration();
+
+// Inject $app into the view container for use in view files.
+$app->view->setApp($app);
+
+// Update view configuration with values from config file.
+$app->view->configure("view.php");
 
 // Load the routes
 require ANAX_INSTALL_PATH . "/config/route.php";

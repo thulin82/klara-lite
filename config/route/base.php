@@ -1,54 +1,24 @@
 <?php
 
 $app->router->add("", function () use ($app) {
-    $urlHome  = $app->url->create("");
-    $urlAbout = $app->url->create("about");
-    $urlStatus = $app->url->create("status");
-    $navbar = <<<EOD
-<navbar>
-    <a href="$urlHome">Home</a> | 
-    <a href="$urlAbout">About</a> | 
-    <a href="$urlStatus">Status</a>
-</navbar>
-EOD;
+    $app->view->add("base/header", ["title" => "Home"]);
+    $app->view->add("base/navbar");
+    $app->view->add("base/body", ["title" => "Home", "paragraph" => "This is the homepage"]);
 
-    $body = <<<EOD
-<!doctype html>
-<meta charset="utf-8">
-<title>Home</title>
-$navbar
-<h1>Home</h1>
-<p>This is the homepage.</p>
-EOD;
-
-    $app->response->setBody($body)
-              ->send();
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
 });
+
 
 $app->router->add("about", function () use ($app) {
-    $urlHome  = $app->url->create("");
-    $urlAbout = $app->url->create("about");
-    $urlStatus = $app->url->create("status");
-    $navbar = <<<EOD
-<navbar>
-    <a href="$urlHome">Home</a> | 
-    <a href="$urlAbout">About</a> | 
-    <a href="$urlStatus">Status</a>
-</navbar>
-EOD;
+    $app->view->add("base/header", ["title" => "About"]);
+    $app->view->add("base/navbar");
+    $app->view->add("base/body", ["title" => "About", "paragraph" => "This is the page about me"]);
 
-    $body = <<<EOD
-<!doctype html>
-<meta charset="utf-8">
-<title>About</title>
-$navbar
-<h1>About</h1>
-<p>This is the page about me.</p>
-EOD;
-
-    $app->response->setBody($body)
-              ->send();
+    $app->response->setBody([$app->view, "render"])
+                  ->send();
 });
+
 
 $app->router->add("status", function () use ($app) {
     $data = [
