@@ -19,7 +19,8 @@ $navbar
 <p>This is the homepage.</p>
 EOD;
 
-    echo $body;
+    $app->response->setBody($body)
+              ->send();
 });
 
 $app->router->add("about", function () use ($app) {
@@ -41,5 +42,6 @@ $navbar
 <p>This is the page about me.</p>
 EOD;
 
-    echo $body;
+    $app->response->setBody($body)
+              ->send();
 });

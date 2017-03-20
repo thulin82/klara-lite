@@ -27,5 +27,6 @@ $routes
 $intRoutes
 EOD;
 
-    echo $body;
+    $app->response->setBody($body)
+              ->send(404);
 });
